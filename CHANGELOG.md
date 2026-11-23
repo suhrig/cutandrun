@@ -3,13 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.2.3] - 2025-06-08
+## [Unreleased]
 
 ### Fixes
 
 - `blacklist` and `gene_bed` were not loaded from `igenomes.config`
 - fix off-by-one/two errors in blacklists
 - Ensembl blacklist used NCBI contig names
+
+### Enhancements
+
+- Replaced `bin/check_samplesheet.py` with `nf-schema` validation. Per-row checks (required columns, FASTQ extensions, no-spaces, file existence) are now driven by `assets/schema_input.json`; cross-row checks (referenced controls exist, contiguous replicate ids, duplicate rows, `--use_control` consistency) and the replicate-aware control pairing are handled in Groovy in `subworkflows/local/utils_nfcore_cutandrun_pipeline`. Adds nf-test unit tests for the new function.
 
 ## [3.2.2] - 2024-02-01
 
@@ -22,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixes
 
 - Fixed error that caused mismapping of IgG controls to their targets in certain samplesheet configurations.
+- Changed the default output directory to `null` to conform with other nf-core workflows [#279](https://github.com/nf-core/cutandrun/pull/279)
 
 ## [3.2.1] - 2023-10-22
 
